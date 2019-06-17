@@ -7,12 +7,15 @@
 	  </button>
 	  <div class="collapse navbar-collapse" id="navbarNav">
 	    <ul class="navbar-nav">
-	      <li class="nav-item active">
-	        <router-link class="nav-link" to="/Login">Login<span class="sr-only">(current)</span></router-link>
+	      <li v-if="!loggedIn" class="nav-item active">
+	        <router-link class="nav-link" to="/login">Login<span class="sr-only">(current)</span></router-link>
+	      </li>
+	      <li v-if="loggedIn" class="nav-item">
+	        <router-link class="nav-link" to="/logout">Logout</router-link>
 	      </li>
 	      <li class="nav-item">
-	        <router-link class="nav-link" to="#">Logout</router-link>
-	      </li>	      
+	        <router-link class="nav-link" to="/aplication">Api</router-link>
+	      </li>		      
 	    </ul>
 	  </div>
 	</nav>
@@ -25,8 +28,10 @@
 
 <script>
 	export default {
-		mounted() {
-			console.log('Componente montado');
+		computed: {
+			loggedIn() {
+				return this.$store.getters.loggedIn
+			}
 		}
 	}
 </script>
